@@ -1,3 +1,5 @@
+const todayEl = document.getElementById("today");
+
 const themeBtn = document.getElementById("themeBtn");
 
 const input = document.getElementById("winInput");
@@ -77,6 +79,13 @@ button.addEventListener("click", function () {
 
     input.value = "";
 });
+
+function showToday() {
+    const date = new Date().toDateString();
+    todayEl.textContent = `📅 Today: ${date}`;
+}
+
+showToday();
 
 render();
 
