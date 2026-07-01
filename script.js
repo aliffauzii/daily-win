@@ -87,7 +87,39 @@ function showToday() {
 
 showToday();
 
-render();
+function render() {
+    list.innerHTML = "";
+
+    if (wins.length === 0) {
+        const empty = document.createElement("li");
+        empty.textContent = "No wins yet — add your first one today 🚀";
+        empty.style.opacity = "0.6";
+        empty.style.fontStyle = "italic";
+        list.appendChild(empty);
+        streakEl.textContent = `🔥 Streak: ${streak} day(s)`;
+        return;
+    }
+
+    wins.forEach((win, index) => {
+        const li = document.createElement("li");
+
+        li.textContent = win;
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "❌";
+
+        delBtn.addEventListener("click", () => {
+            wins.splice(index, 1);
+            saveAll();
+            render();
+        });
+
+        li.appendChild(delBtn);
+        list.appendChild(li);
+    });
+
+    streakEl.textContent = `🔥 Streak: ${streak} day(s)`;
+};
 
 let darkMode = localStorage.getItem("darkMode") === "true";
 
